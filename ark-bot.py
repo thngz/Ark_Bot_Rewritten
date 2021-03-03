@@ -93,7 +93,7 @@ def sendTweet():
                 if len(tweet) < 240:
                     print(tweet)
                     print("Sending tweet")
-                    #api.update_status(status=tweet)
+                    api.update_status(status=tweet)
                 else:
                     print("Too many chars")
                     # for future reference, cut up the huge string and send 1 location at a time
