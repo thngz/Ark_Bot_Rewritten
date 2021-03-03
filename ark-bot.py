@@ -88,7 +88,6 @@ def sendTweet():
         pass
     elif tweet:           
             try:  
-                print(tweet)
                 #when length of the string is smaller than twitter max character length
                 if len(tweet) < 240:
                     print(tweet)
