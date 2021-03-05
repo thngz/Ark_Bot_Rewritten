@@ -59,8 +59,7 @@ def scrape():
             #yield over return because sometimes there are many changes
 
             yield diff
-
-            #write the updates to the json 
+            #write the updates to the json
 
             with open('ark-bot-rewritten/cache.json', 'w') as f:
                 json.dump(new_times, f)
@@ -85,8 +84,7 @@ def sendTweet():
 
     if data is None:
         print("nothing")
-        pass
-    elif tweet:           
+    elif tweet:
             try:  
                 #when length of the string is smaller than twitter max character length
                 if len(tweet) < 240:
@@ -103,12 +101,8 @@ def sendTweet():
                     print('Duplikaat')
                 else:
                     raise error
-       
-
 while 1:
-
     #start the cycle every 5s
-
     scrape()
     sendTweet()
     time.sleep(5)
