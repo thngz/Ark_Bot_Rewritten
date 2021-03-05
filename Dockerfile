@@ -1,5 +1,5 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
-FROM balenalib/raspberry-pi-debian-python:latest
+FROM balenalib/raspberry-pi-debian-python
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
