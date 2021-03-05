@@ -85,7 +85,7 @@ def sendTweet():
     if data is None:
         print("nothing")
     elif tweet:
-            try:  
+            try:
                 #when length of the string is smaller than twitter max character length
                 if len(tweet) < 240:
                     print(tweet)
