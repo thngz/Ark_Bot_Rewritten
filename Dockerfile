@@ -1,5 +1,5 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
-FROM balenalib/raspberry-pi-debian-python
+FROM python:3.8-alpine3.12
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -14,9 +14,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 WORKDIR /app
 COPY . /app
 
-# Switching to a non-root user, please refer to https://aka.ms/vscode-docker-python-user-rights
-RUN useradd appuser && chown -R appuser /app
-USER appuser
+# Switching to a non-root user, please refer to https://aka.ms/vscode-docker-py>
+# Create a group and user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
-# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["python", "ark-bot-rewritten/ark-bot.py"]
+# Tell docker that all future commands should run as the appuser user
+USER appuser
+# During debugging, this entry point will be overridden. For more information, >
+CMD ["python", "ark-bot.py"]
