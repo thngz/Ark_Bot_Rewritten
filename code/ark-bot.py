@@ -17,7 +17,7 @@ class Arkbot:
         self.soup = BeautifulSoup(self.html.text, "html.parser")
         self.diff = None
         self.DB_NAME = "examtimes"
-        self.host = "db"
+        self.host = "mysql"
         self.db = mysql.connector.connect(user="root", password="root", host=self.host)
         self.cursor = self.db.cursor()
         self.old_times = None
