@@ -16,9 +16,8 @@ class Arkbot:
         self.html = requests.get(self.url)
         self.soup = BeautifulSoup(self.html.text, "html.parser")
         self.diff = None
-        self.DB_NAME = "examtimes"
-        self.host = "mysql"
-        self.db = mysql.connector.connect(user="root", password="root", host=self.host)
+        self.DB_NAME = "exam_times"
+        self.db = mysql.connector.connect(user="root", password="root", host="mysql")
         self.cursor = self.db.cursor()
         self.old_times = None
         self.diffs = []
@@ -98,8 +97,8 @@ class Arkbot:
                             .replace("{", "")
                             .replace("}", "")
                             .replace("'", "")
-                            .replace(",", "\n") +
-                            str(currentTime) +
+                            .replace(",", "\n") + "\n" +
+                            str(currentTime) + "\n" + 
                             "eteenindus.mnt.ee/main.jsf"
                     )
                     if tweet:

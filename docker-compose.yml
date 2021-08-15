@@ -4,24 +4,26 @@ services:
         image: python:3.9-slim-buster
         volumes:
             - ./code:/usr/src/app
+            - /etc/localtime:/etc/localtime  
         command: bash -c 'cd /usr/src/app && pip install -r requirements.txt && python ark-bot.py'
         depends_on: 
             - mysql
         environment: 
-            -  PYTHONUNBUFFERED=1
+            TZ: Europe/Tallinn
+            PYTHONUNBUFFERED: 1
+            MYSQL_HOST: mysql
         restart: always
     mysql:
-        hostname: db
         image: "mysql:8.0.24"
         environment: 
-            MYSQL_ROOT_PASSWORD: root 
+            MYSQL_DATABASE: exam_times
+            MYSQL_ROOT_PASSWORD: root
             MYSQL_ROOT_USER: root
             MYSQL_USER: user
-            MYSQL_PASSWORD: user
-            MYSQL_DATABASE: exam-times
+            MYSQL_PASSWORD: pass
         ports:
             - '3306:3306'
         volumes:
-            - ./database:/var/lib/mysql
+            - ./db:/var/lib/mysql
 
         restart: always
