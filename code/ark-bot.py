@@ -5,7 +5,7 @@ import tweepy
 import os
 import mysql.connector
 from dotenv import load_dotenv
-
+from datetime import datetime, timedelta
 
 print(f"started at {time.strftime('%X')}")
 
@@ -79,6 +79,7 @@ class Arkbot:
                     self.old_times.pop(0)
 
     def tweet(self):
+        currentTime = datetime.now()
         load_dotenv()
         auth = tweepy.OAuthHandler(
             os.getenv("API_KEY"), os.getenv("API_SECRET_KEY")
@@ -93,16 +94,19 @@ class Arkbot:
             try:
                 for diff in self.diffs:
                     tweet = (
-                        "\n".join(map(str, diff))
-                        .replace("{", "")
-                        .replace("}", "")
-                        .replace("'", "")
-                        .replace(",", "\n")
+                            "\n".join(map(str, diff))
+                            .replace("{", "")
+                            .replace("}", "")
+                            .replace("'", "")
+                            .replace(",", "\n") +
+                            str(currentTime) +
+                            "eteenindus.mnt.ee/main.jsf"
                     )
                     if tweet:
                         print(tweet)
                         print("Sending tweet")
                         api.update_status(status=tweet)
+
                         tweet = None
                         self.diffs.pop(0)
                     else:
